@@ -1,0 +1,112 @@
+:root {
+  --a4-width: 210mm;
+  --a4-height: 297mm;
+  --page-margin: 18mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #888;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #1a1a1a;
+}
+
+.page {
+  position: relative;
+  width: var(--a4-width);
+  min-height: var(--a4-height); /* not height — lets overflow push the box down, never clips */
+  margin: 24px auto;
+  background: #fff;
+  overflow: visible;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+.page-content {
+  padding: calc(var(--page-margin) - 28pt) calc(var(--page-margin) - 9pt);
+}
+
+/* boundary marker fixed at exactly one A4 height, regardless of overflow below it */
+.page::after {
+  content: "";
+  position: absolute;
+  top: var(--a4-height);
+  left: 0;
+  width: 100%;
+  border-top: 2px dashed red;
+  pointer-events: none;
+}
+
+.page-content h1 {
+  font-size: 22pt;
+  margin-top: 1pt;
+  margin-bottom: 1pt;
+}
+
+.page-content  h2:nth-child(2) {
+  font-size: 12pt;
+  text-transform: uppercase;
+  margin-top: 1pt;
+  margin-bottom: 1pt;
+}
+
+.page-content h2 {
+  font-size: 10pt;
+  text-transform: uppercase;
+  margin-top: 9pt;
+  margin-bottom: 0pt;
+}
+
+.page-content h3 {
+  font-size: 11pt;
+  margin-top: 6pt;
+  margin-bottom: 0pt;
+  display: flex;
+  justify-content: space-between;
+
+  em {
+    font-style: italic;
+    font-weight: 400;
+  }
+}
+
+.page-content p,
+.page-content li {
+  font-size: 9.5pt;
+  line-height: 1.4;
+  margin-top: 1pt;
+  margin-bottom: 1pt;
+}
+
+.page-content ul {
+  margin: 0pt 0;
+  padding-left: 10pt;
+}
+
+/* print-mode: strip all preview-only chrome */
+body.printing .page {
+  box-shadow: none;
+  margin: 0;
+}
+
+body.printing .page::after {
+  display: none;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .page {
+    box-shadow: none;
+    margin: 0;
+  }
+
+  .page::after {
+    display: none;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "cv_pdf_generator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Markdown -> PDF tool with a live-preview intermediate step",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "pdf": "node export-pdf.js",
+    "build": "node export-pdf.js",
+    "test": "node --test",
+    "test:unit": "node --test test/render.test.js test/server.test.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "markdown-it": "^14.1.0",
+    "puppeteer": "^25.11.0",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
